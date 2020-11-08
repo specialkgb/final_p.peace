@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.nav.dao.MemberDao">
+ 
+ 	<insert id="insert" parameterType="MemberVO">
+ 		INSERT INTO tbl_navimember (
+ 					seq,
+			 		n_userid,
+					n_password,
+					n_email,
+					n_roll,
+					n_date
+			 		
+					
+	 	) VALUES (
+	 				SEQ_NAVIMEMBER.NEXTVAL,
+				 	#{n_userid},
+					#{n_password},
+					#{n_email},
+					#{n_roll},
+					#{n_date}
+	 	)
+ 	</insert>
+ 	
+ 	<select id="findById" resultType="MemberVO">
+ 	
+ 		SELECT * FROM tbl_navimember WHERE n_userid = #{n_userid}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="MemberVO">
+ 		UPDATE tbl_navimember SET 
+ 					
+			n_password = #{n_password},
+			n_email	=#{n_email}	
+				
+ 		WHERE seq = #{seq}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM tbl_navimember 
+ 		WHERE n_userid = #{n_userid}
+ 		AND n_password=#{n_password}
+ 	</delete>
+ 	
+ 	<select id="idCheck" resultType="MemberVO">
+ 	SELECT n_userid FROM tbl_navimember
+ 	WHERE n_userid = #{n_userid} 
+ 	
+ 	</select>
+ 	
+ 	<select id="passCheck" resultType="MemberVO">
+ 	SELECT n_password FROM tbl_navimember
+ 	WHERE n_password = #{n_password} AND n_userid = #{n_userid} 
+ 	
+ 	</select>
+ 
+ </mapper>
